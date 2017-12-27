@@ -1,4 +1,4 @@
-from realty_app.set import app
+from realty_app import app
 
 
 if __name__ == '__main__':

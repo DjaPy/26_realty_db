@@ -1,9 +1,15 @@
 import requests
 import json
 import argparse
+import sys
 
-from .set  import db
-from .models import Real_estate
+print(sys.path)
+
+sys.path.insert(0, '/Users/djapy/devman/26_realty_db/')
+
+print(sys.path)
+from realty_app import db
+from realty_app.models import Real_estate
 
 
 url = 'https://devman.org/media/filer_public/e5/62/' \

@@ -1,9 +1,9 @@
 from flask import render_template, request
 from datetime import datetime
 
-from realty_app.set import app
-from .models import Real_estate, db
-from .proc_json import add_real_estate_content
+from realty_app import app
+from realty_app.models import Real_estate, db
+from realty_app.proc_json import add_real_estate_content
 
 
 PER_PAGE = 15
@@ -57,9 +57,7 @@ def ads_list(page=1):
     #         "living_area": 17.3,
     #         "has_balcony": True,
     #
-
-
-                 "address": "Юбилейная",
+    #        "address": "Юбилейная",
     #         "construction_year": 2001,
     #         "rooms_number": 2,
     #         "premise_area": 43.0,
