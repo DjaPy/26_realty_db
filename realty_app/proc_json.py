@@ -3,11 +3,8 @@ import json
 import argparse
 import sys
 
-print(sys.path)
-
 sys.path.insert(0, '/Users/djapy/devman/26_realty_db/')
 
-print(sys.path)
 from realty_app import db
 from realty_app.models import Real_estate
 
@@ -46,7 +43,6 @@ def add_real_estate_content(json_content):
         db.session.commit()
 
 
-
 def parser_for_update_db():
     parser = argparse.ArgumentParser(description="Updates the database")
     parser.add_argument('-u', '--update', required=True,
@@ -56,7 +52,9 @@ def parser_for_update_db():
 
 
 if __name__ == '__main__':
-
-
-    json_content = load_json(url)
+    json_content = parser_for_update_db()
+    if json_content.update:
+        json_content = json_content.update
+    else:
+        json_content = load_json(url)
     add_real_estate_content(json_content)
