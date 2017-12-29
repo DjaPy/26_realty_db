@@ -55,6 +55,6 @@ if __name__ == '__main__':
     json_content = parser_for_update_db()
     try:
         json_content = json_content.update
-    except:
+    except AttributeError:
         json_content = load_json(url)
     add_real_estate_content(json_content)
