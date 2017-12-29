@@ -19,8 +19,8 @@ def load_json(url):
     return json_content
 
 
-def get_json_from_unix(file):
-    return json.load(file)
+def get_json_from_unix(json_file):
+    return json.load(json_file)
 
 
 def add_real_estate_content(json_content):
