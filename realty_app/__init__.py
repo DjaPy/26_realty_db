@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from realty_app.models import db
+from realty_app import views
 
 
 app = Flask(__name__)
@@ -10,5 +11,3 @@ db.init_app(app)
 
 if not os.path.exists('real_estate.db'):
     db.create_all()
-
-from realty_app import views

@@ -2,12 +2,12 @@ import requests
 import json
 import argparse
 import sys
+from realty_app import db
+from realty_app.models import RealEstate
 
 number_index = 0
 sys.path.insert(number_index, '/home/kento/devman/26_realty_db/')
 
-from realty_app import db
-from realty_app.models import Real_estate
 
 url = 'https://devman.org/media/filer_public/e5/62/' \
       'e56287d2-9519-4e18-878a-6d4849b628e2/ads.json'
@@ -25,7 +25,7 @@ def get_json_from_unix(json_file):
 
 def add_real_estate_content(json_content):
     for apartment in json_content:
-        apartment_data = Real_estate(
+        apartment_data = RealEstate(
             id=apartment['id'],
             settlement=apartment['settlement'],
             under_construction=apartment['under_construction'],
@@ -49,6 +49,7 @@ def parser_for_update_db():
                         type=argparse.FileType(mode='r'),
                         help='Allows you to update the database'
                              ' from the upload, in json format')
+    return parser.parse_args()
 
 
 if __name__ == '__main__':
