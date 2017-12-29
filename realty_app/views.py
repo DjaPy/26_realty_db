@@ -2,8 +2,8 @@ from flask import render_template, request
 from datetime import datetime
 
 from realty_app import app
-from realty_app.models import Real_estate, db
-from realty_app.proc_json import add_real_estate_content
+from realty_app.models import Real_estate
+
 
 
 PER_PAGE = 15
@@ -28,10 +28,10 @@ def ads_list(page=1):
 
     if new_building:
         year_now = datetime.today().year
-        diff_between_the_new_old_build = 2
+        time_after_conctruction = 2
         year_built = Real_estate.construction_year
         check_new_building = year_now - year_built
-        ads = ads.filter(check_new_building <= diff_between_the_new_old_build)
+        ads = ads.filter(check_new_building <= time_after_conctruction)
     if oblast_district:
         ads = ads.filter_by(oblast_district=oblast_district)
     if min_cost:
