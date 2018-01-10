@@ -153,12 +153,27 @@
                 <div class="panel-body">
                   <div class="clearfix">
                     <ul class="pagination pull-right">
-                      <li class="disabled"><span>«</span></li>
-                      <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
-                      <li><a href="?page=2" role="next">2</a></li>
-                      <li><a href="?page=3" role="next">3</a></li>
-                      <li><a href="?page=4" role="next">4</a></li>
-                      <li><a href="?page=2" role="next">»</a></li>
+                      {% if ads.has_prev %}
+                        <li><a href="{{ url_for(request.endpoint, page=ads.prev_num, oblast_district=oblast_district, new_building=new_building, min_price=min_price, max_price=max_price) }}"><span>«</span></a></li>
+                      {% else %}
+                        <li class="disabled"><span>«</span></li>
+                      {% endif %}
+                      {% for page in ads.iter_pages() %}
+                        {% if page %}
+                          {% if page != ads.page %}
+                            <li><a href="{{ url_for(request.endpoint, page=page, oblast_district=oblast_district, new_building=new_building, min_price=min_price, max_price=max_price) }}">{{ page }}</a></li>
+                          {% else %}
+                            <li class="active"><span>{{ page }}</span></li>
+                          {% endif %}
+                        {% else %}
+                          <li><span class="ellipsis">...</span></li>
+                        {% endif %}
+                      {% endfor %}
+                      {% if ads.has_next %}
+                        <li><a href="{{ url_for(request.endpoint, page=ads.next_num, oblast_district=oblast_district, new_building=new_building, min_price=min_price, max_price=max_price) }}"><span>»</span></a></li>
+                      {% else %}
+                        <li class="disabled"><span>»</span></li>
+                      {% endif %}
                     </ul>
                   </div>
                 </div>
@@ -171,5 +186,10 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("select[name='oblast_district']").find("option[value='{{ oblast_district }}']").attr("selected",true);
+      });
+    </script>
   </body>
 </html>
